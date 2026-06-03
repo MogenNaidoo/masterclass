@@ -304,4 +304,4 @@ const Sprint2: React.FC = () => {
   );
 };
 
-export de
+export default Sprint2;

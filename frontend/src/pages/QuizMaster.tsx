@@ -163,4 +163,4 @@ const QuizMaster: React.FC = () => {
   );
 };
 
-export defau
+export default QuizMaster;

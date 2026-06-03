@@ -84,4 +84,4 @@ const GlobalObjectionOverlay: React.FC = () => {
   );
 };
 
-export default GlobalObj
+export default GlobalObjectionOverlay;

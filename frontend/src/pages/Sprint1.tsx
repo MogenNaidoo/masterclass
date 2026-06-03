@@ -217,4 +217,4 @@ const Sprint1: React.FC = () => {
   );
 };
 
-export de
+export default Sprint1;

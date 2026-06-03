@@ -156,4 +156,4 @@ const ObjectionPingPong: React.FC = () => {
   );
 };
 
-export default Obje
+export default ObjectionPingPong;
