@@ -41,18 +41,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3001;
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  app.use('/masterclass', express.static(path.join(__dirname, '../frontend/dist')));
-  app.get('/masterclass/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-  });
-  
-  // Redirect root to the subpath
-  app.get('/', (req, res) => {
-    res.redirect('/masterclass');
-  });
-}
+// No static file serving needed for Split Hosting (Frontend is on Afrihost)
 
 // Sync DB and start server
 sequelize.sync().then(() => {
