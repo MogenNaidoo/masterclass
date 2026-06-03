@@ -1,0 +1,47 @@
+require('dotenv').config();
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+const cors = require('cors');
+const { sequelize } = require('./models');
+const apiRoutes = require('./routes/api');
+const setupSockets = require('./controllers/socketController');
+
+const app = express();
+const server = http.createServer(app);
+
+// CORS configuration - allow all for local dev
+app.use(cors());
+app.use(express.json());
+
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+});
+
+app.use('/api', apiRoutes);
+
+setupSockets(io);
+
+const path = require('path');
+
+const PORT = process.env.PORT || 3001;
+
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+  });
+}
+
+// Sync DB and start server
+sequelize.sync().then(() => {
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}).catch(err => {
+  console.error('Database connection failed:', err);
+});
