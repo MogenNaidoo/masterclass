@@ -34,11 +34,11 @@ const Sprint2: React.FC = () => {
   });
 
   const fetchFellowsAndCriteria = async () => {
-    const fRes = await fetch('/api/sprints/2/fellows');
+    const fRes = await fetch('/masterclass/api/sprints/2/fellows');
     const fData = await fRes.json();
     setFellows(fData);
 
-    const cRes = await fetch('/api/sprints/2/criteria');
+    const cRes = await fetch('/masterclass/api/sprints/2/criteria');
     const cData = await cRes.json();
     setCriteria(cData);
     

@@ -25,11 +25,11 @@ const Sprint1: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const fetchFellowsAndCriteria = async () => {
-    const fRes = await fetch('/api/sprints/1/fellows');
+    const fRes = await fetch('/masterclass/api/sprints/1/fellows');
     const fData = await fRes.json();
     setFellows(fData);
 
-    const cRes = await fetch('/api/sprints/1/criteria');
+    const cRes = await fetch('/masterclass/api/sprints/1/criteria');
     const cData = await cRes.json();
     setCriteria(cData);
     

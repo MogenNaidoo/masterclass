@@ -31,7 +31,7 @@ const ObjectionPingPong: React.FC = () => {
 
   useEffect(() => {
     const fetchAttendees = async () => {
-      const res = await fetch('/api/attendees');
+      const res = await fetch('/masterclass/api/attendees');
       const data = await res.json();
       setAttendees(data.filter((a: any) => !a.is_admin)); // Exclude admin
     };

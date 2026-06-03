@@ -3,11 +3,15 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/masterclass/',
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:3001',
-      '/socket.io': {
+      '/masterclass/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true
+      },
+      '/masterclass/socket.io': {
         target: 'http://localhost:3001',
         ws: true
       }

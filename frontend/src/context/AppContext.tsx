@@ -28,7 +28,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
 
     // Connect to backend
-    const newSocket = io('/');
+    const newSocket = io('/', { path: '/masterclass/socket.io' });
     setSocket(newSocket);
 
     return () => {

@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
 
   const fetchSprints = async () => {
     try {
-      const res = await fetch('/api/sprints');
+      const res = await fetch('/masterclass/api/sprints');
       const data = await res.json();
       setSprints(data);
     } catch (err) {
@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
 
     const fetchPollState = async () => {
       try {
-        const res = await fetch('/api/settings/poll_locked');
+        const res = await fetch('/masterclass/api/settings/poll_locked');
         const data = await res.json();
         setPollLocked(data.locked);
       } catch (err) {}

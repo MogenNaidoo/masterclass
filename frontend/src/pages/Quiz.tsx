@@ -39,7 +39,7 @@ const Quiz: React.FC = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch('/api/poll-questions');
+      const res = await fetch('/masterclass/api/poll-questions');
       const data = await res.json();
       setQuestions(data);
     };
@@ -81,7 +81,7 @@ const Quiz: React.FC = () => {
     const timeTakenMs = Date.now() - (quizState.start_time || Date.now());
 
     try {
-      const res = await fetch('/api/poll-response', {
+      const res = await fetch('/masterclass/api/poll-response', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

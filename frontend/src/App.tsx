@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children, adminOnly = false }: { children: React.React
 
 const AppRoutes = () => {
   return (
-    <Router>
+    <Router basename="/masterclass">
       <div className="container">
         <Routes>
           <Route path="/login" element={<Login />} />

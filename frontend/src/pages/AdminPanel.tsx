@@ -26,19 +26,19 @@ const AdminPanel: React.FC = () => {
   const [assignments, setAssignments] = useState<Record<number, number[]>>({});
 
   const fetchSprints = async () => {
-    const res = await fetch('/api/sprints');
+    const res = await fetch('/masterclass/api/sprints');
     const data = await res.json();
     setSprints(data);
   };
 
   const fetchAttendees = async () => {
-    const res = await fetch('/api/attendees');
+    const res = await fetch('/masterclass/api/attendees');
     const data = await res.json();
     setAttendees(data);
   };
 
   const fetchPollState = async () => {
-    const res = await fetch('/api/settings/poll_locked');
+    const res = await fetch('/masterclass/api/settings/poll_locked');
     const data = await res.json();
     setPollLocked(data.locked);
   };
@@ -70,7 +70,7 @@ const AdminPanel: React.FC = () => {
   const handleUnlockPoll = async () => {
     if (!attendee?.is_admin) return;
     try {
-      const res = await fetch('/api/admin/settings/poll_unlock', { method: 'POST' });
+      const res = await fetch('/masterclass/api/admin/settings/poll_unlock', { method: 'POST' });
       if (res.ok) {
         if (socket) socket.emit('pollUnlocked');
         fetchPollState();
@@ -117,7 +117,7 @@ const AdminPanel: React.FC = () => {
 
   const handleExport = async () => {
     try {
-      const res = await fetch('/api/admin/export');
+      const res = await fetch('/masterclass/api/admin/export');
       const data = await res.json();
       
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -140,7 +140,7 @@ const AdminPanel: React.FC = () => {
     }
     
     try {
-      const res = await fetch('/api/admin/reset', { method: 'POST' });
+      const res = await fetch('/masterclass/api/admin/reset', { method: 'POST' });
       if (res.ok) {
         setModalProps({ isOpen: true, title: 'Success', message: 'All data has been reset.', type: 'success' });
         fetchSprints();

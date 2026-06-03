@@ -38,11 +38,11 @@ const Sprint3: React.FC = () => {
   const [defenseText, setDefenseText] = useState('');
 
   const fetchFellowsAndCriteria = async () => {
-    const fRes = await fetch('/api/sprints/3/fellows');
+    const fRes = await fetch('/masterclass/api/sprints/3/fellows');
     const fData = await fRes.json();
     setFellows(fData);
 
-    const cRes = await fetch('/api/sprints/3/criteria');
+    const cRes = await fetch('/masterclass/api/sprints/3/criteria');
     const cData = await cRes.json();
     setCriteria(cData);
     

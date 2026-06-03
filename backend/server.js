@@ -15,13 +15,14 @@ app.use(cors());
 app.use(express.json());
 
 const io = new Server(server, {
+  path: '/masterclass/socket.io',
   cors: {
     origin: '*',
     methods: ['GET', 'POST']
   }
 });
 
-app.use('/api', apiRoutes);
+app.use('/masterclass/api', apiRoutes);
 
 setupSockets(io);
 
@@ -31,9 +32,14 @@ const PORT = process.env.PORT || 3001;
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  app.get('*', (req, res) => {
+  app.use('/masterclass', express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('/masterclass/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+  });
+  
+  // Redirect root to the subpath
+  app.get('/', (req, res) => {
+    res.redirect('/masterclass');
   });
 }
 
