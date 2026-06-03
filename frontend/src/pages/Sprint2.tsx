@@ -34,11 +34,11 @@ const Sprint2: React.FC = () => {
   });
 
   const fetchFellowsAndCriteria = async () => {
-    const fRes = await fetch('/masterclass/api/sprints/2/fellows');
+    const fRes = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/2/fellows`);
     const fData = await fRes.json();
     setFellows(fData);
 
-    const cRes = await fetch('/masterclass/api/sprints/2/criteria');
+    const cRes = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/2/criteria`);
     const cData = await cRes.json();
     setCriteria(cData);
     
@@ -95,7 +95,7 @@ const Sprint2: React.FC = () => {
     }
 
     if (attendee.is_admin) {
-      await fetch(`/api/admin/sprints/2/fellows/${fellows[currentFellowIndex].attendee_id}/complete`, { method: 'PUT' });
+      await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/admin/sprints/2/fellows/${fellows[currentFellowIndex].attendee_id}/complete`, { method: 'PUT' });
     }
 
     if (currentFellowIndex < fellows.length - 1) {
@@ -195,7 +195,7 @@ const Sprint2: React.FC = () => {
             <button onClick={async () => {
               if (attendee) {
                 try {
-                  await fetch(`/api/sprints/2/fellows/${attendee.attendee_id}/defense`, {
+                  await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/2/fellows/${attendee.attendee_id}/defense`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ defense_text: JSON.stringify(copywriting) })

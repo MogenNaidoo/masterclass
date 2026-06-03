@@ -28,7 +28,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
 
     // Connect to backend
-    const newSocket = io('/', { path: '/masterclass/socket.io' });
+    const newSocket = io(import.meta.env.VITE_API_URL || '/', { path: '/masterclass/socket.io' });
     setSocket(newSocket);
 
     return () => {

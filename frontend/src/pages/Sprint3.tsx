@@ -38,11 +38,11 @@ const Sprint3: React.FC = () => {
   const [defenseText, setDefenseText] = useState('');
 
   const fetchFellowsAndCriteria = async () => {
-    const fRes = await fetch('/masterclass/api/sprints/3/fellows');
+    const fRes = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/3/fellows`);
     const fData = await fRes.json();
     setFellows(fData);
 
-    const cRes = await fetch('/masterclass/api/sprints/3/criteria');
+    const cRes = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/3/criteria`);
     const cData = await cRes.json();
     setCriteria(cData);
     
@@ -89,7 +89,7 @@ const Sprint3: React.FC = () => {
     }
 
     if (attendee.is_admin) {
-      await fetch(`/api/admin/sprints/3/fellows/${fellows[currentFellowIndex].attendee_id}/complete`, { method: 'PUT' });
+      await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/admin/sprints/3/fellows/${fellows[currentFellowIndex].attendee_id}/complete`, { method: 'PUT' });
     }
 
     if (currentFellowIndex < fellows.length - 1) {
@@ -107,7 +107,7 @@ const Sprint3: React.FC = () => {
 
   const handleAssignScenario = async (scenario: string) => {
     const currentFellow = fellows[currentFellowIndex];
-    await fetch(`/api/admin/sprints/3/fellows/${currentFellow.attendee_id}/scenario`, {
+    await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/admin/sprints/3/fellows/${currentFellow.attendee_id}/scenario`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ scenario })
@@ -121,7 +121,7 @@ const Sprint3: React.FC = () => {
   const handleSubmitDefense = async () => {
     if (!attendee) return;
     try {
-      const res = await fetch(`/api/sprints/3/fellows/${attendee.attendee_id}/defense`, {
+      const res = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/3/fellows/${attendee.attendee_id}/defense`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ defense_text: defenseText })

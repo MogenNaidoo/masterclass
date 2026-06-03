@@ -15,7 +15,7 @@ const Leaderboard: React.FC = () => {
   const [data, setData] = useState<LeaderboardData | null>(null);
 
   const fetchLeaderboard = async () => {
-    const res = await fetch('/masterclass/api/leaderboard');
+    const res = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/leaderboard`);
     const json = await res.json();
     setData(json);
   };
