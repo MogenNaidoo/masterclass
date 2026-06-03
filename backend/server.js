@@ -1,4 +1,15 @@
 require('dotenv').config();
+
+process.on('uncaughtException', (err) => {
+  console.error('FATAL UNCAUGHT EXCEPTION:', err);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('FATAL UNHANDLED REJECTION:', reason);
+  process.exit(1);
+});
+
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -49,5 +60,8 @@ sequelize.sync().then(() => {
     console.log(`Server running on port ${PORT}`);
   });
 }).catch(err => {
-  console.error('Database connection failed:', err);
+  console.error('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  console.error('FATAL DATABASE CONNECTION ERROR:', err);
+  console.error('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  process.exit(1);
 });
