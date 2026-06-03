@@ -25,11 +25,11 @@ const Sprint1: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const fetchFellowsAndCriteria = async () => {
-    const fRes = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/1/fellows`);
+    const fRes = await fetch(`${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/1/fellows`);
     const fData = await fRes.json();
     setFellows(fData);
 
-    const cRes = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/1/criteria`);
+    const cRes = await fetch(`${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/1/criteria`);
     const cData = await cRes.json();
     setCriteria(cData);
     
@@ -88,7 +88,7 @@ const Sprint1: React.FC = () => {
     }
 
     if (attendee.is_admin) {
-      await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/admin/sprints/1/fellows/${fellows[currentFellowIndex].attendee_id}/complete`, { method: 'PUT' });
+      await fetch(`${import.meta.env.VITE_API_URL || ''}/masterclass/api/admin/sprints/1/fellows/${fellows[currentFellowIndex].attendee_id}/complete`, { method: 'PUT' });
     }
 
     if (currentFellowIndex < fellows.length - 1) {

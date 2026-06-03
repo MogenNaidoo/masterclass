@@ -31,7 +31,7 @@ const ObjectionPingPong: React.FC = () => {
 
   useEffect(() => {
     const fetchAttendees = async () => {
-      const res = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/attendees`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/masterclass/api/attendees`);
       const data = await res.json();
       setAttendees(data.filter((a: any) => !a.is_admin)); // Exclude admin
     };
@@ -63,7 +63,7 @@ const ObjectionPingPong: React.FC = () => {
     if (!socket || !attendee || !targetId) return;
     
     try {
-      const res = await fetch(`\${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/3/score`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/masterclass/api/sprints/3/score`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
